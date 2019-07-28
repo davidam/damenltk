@@ -1,0 +1,6 @@
+
+Learning about Natural Language Tool Kit (NLTK) from tests
+
+A first version can be found in: https://github.com/Lingwars/GAPLEN
+
+Thanks to GAPLEN by the shared time.
