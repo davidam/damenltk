@@ -28,6 +28,7 @@ from nltk.corpus import inaugural
 from nltk.corpus import gutenberg
 from nltk.corpus import reuters
 from nltk.corpus import cmudict
+from nltk.corpus import twitter_samples
 
 class TddInPythonExample(unittest.TestCase):
 
@@ -52,3 +53,6 @@ class TddInPythonExample(unittest.TestCase):
         transcr = cmudict.dict()
         t = [transcr[w][0] for w in 'Natural Language Tool Kit'.lower().split()]
         self.assertEqual(t, [['N', 'AE1', 'CH', 'ER0', 'AH0', 'L'], ['L', 'AE1', 'NG', 'G', 'W', 'AH0', 'JH'], ['T', 'UW1', 'L'], ['K', 'IH1', 'T']])
+
+    def test_corpus_twitter_method_returns_correct_result(self):
+        self.assertEqual(twitter_samples.fileids(), ['negative_tweets.json', 'positive_tweets.json', 'tweets.20150430-223406.json'])
