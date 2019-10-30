@@ -62,3 +62,5 @@ class TddInPythonExample(unittest.TestCase):
 
     def test_corpus_verbnet_method_returns_correct_result(self):
         self.assertEqual(verbnet.classids('accept'), ['approve-77', 'characterize-29.2-1-1', 'obtain-13.5.2'])
+        self.assertEqual(verbnet.longid('77'), 'approve-77')
+        self.assertEqual(verbnet.lemmas()[0:10], ['December', 'FedEx', 'UPS', 'abandon', 'abase', 'abash', 'abate', 'abbreviate', 'abduct', 'abet'])
