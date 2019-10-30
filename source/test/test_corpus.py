@@ -29,6 +29,7 @@ from nltk.corpus import gutenberg
 from nltk.corpus import reuters
 from nltk.corpus import cmudict
 from nltk.corpus import twitter_samples
+from nltk.corpus import verbnet
 
 class TddInPythonExample(unittest.TestCase):
 
@@ -56,3 +57,8 @@ class TddInPythonExample(unittest.TestCase):
 
     def test_corpus_twitter_method_returns_correct_result(self):
         self.assertEqual(twitter_samples.fileids(), ['negative_tweets.json', 'positive_tweets.json', 'tweets.20150430-223406.json'])
+        self.assertEqual(twitter_samples.strings('negative_tweets.json')[0], 'hopeless for tmr :(')
+        self.assertEqual(twitter_samples.strings('positive_tweets.json')[0], '#FollowFriday @France_Inte @PKuchly57 @Milipol_Paris for being top engaged members in my community this week :)')
+
+    def test_corpus_verbnet_method_returns_correct_result(self):
+        self.assertEqual(verbnet.classids('accept'), ['approve-77', 'characterize-29.2-1-1', 'obtain-13.5.2'])
