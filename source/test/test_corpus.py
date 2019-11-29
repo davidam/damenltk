@@ -30,6 +30,7 @@ from nltk.corpus import reuters
 from nltk.corpus import cmudict
 from nltk.corpus import twitter_samples
 from nltk.corpus import verbnet
+from nltk.corpus import wordnet
 
 class TddInPythonExample(unittest.TestCase):
 
@@ -64,3 +65,22 @@ class TddInPythonExample(unittest.TestCase):
         self.assertEqual(verbnet.classids('accept'), ['approve-77', 'characterize-29.2-1-1', 'obtain-13.5.2'])
         self.assertEqual(verbnet.longid('77'), 'approve-77')
         self.assertEqual(verbnet.lemmas()[0:10], ['December', 'FedEx', 'UPS', 'abandon', 'abase', 'abash', 'abate', 'abbreviate', 'abduct', 'abet'])
+
+    def test_syn_returns_correct_result(self):
+        syns = wordnet.synsets("program")
+        # An example of a synset:
+        self.assertEqual(syns[0].name(), "plan.n.01")
+        # Just the word:
+        self.assertEqual(syns[0].lemmas()[0].name(), "plan")
+        # Definition of that first synset:
+        self.assertEqual(syns[0].definition(), "a series of steps to be carried out or goals to be accomplished")
+        # Examples of the word in use in sentences:
+        self.assertEqual(syns[0].examples(), ['they drew up a six-step plan', 'they discussed plans for a new bond issue'])
+
+    def test_antonym_returns_correct_result(self):
+        antonyms = []
+        for syn in wordnet.synsets("good"):
+            for l in syn.lemmas():
+                if l.antonyms():
+                    antonyms.append(l.antonyms()[0].name())
+        self.assertEqual(['evil', 'evilness', 'bad', 'badness', 'bad', 'evil', 'ill'], antonyms)
