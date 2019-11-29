@@ -22,19 +22,46 @@
 # Boston, MA 02110-1301 USA,
 
 from setuptools import setup
+import os
+import re
 from os import path
 
 # def readme():
 #     with open('README.org') as f:
 #         return f.read()
 
+cwd = os.getcwd()
+
+def files_one_level(directory):
+    f = os.popen('find '+ directory )
+    l = []
+    for line in f:
+        fields = line.strip().split()
+        l.append(fields[0])
+    return l
+
+def files_one_level_drop_pwd(directory):
+    f = os.popen('find '+ directory)
+    l = []
+    for line in f:
+        fields = line.strip().split()
+        if not(os.path.isdir(fields[0])) and ("__init__.py" not in fields[0]):
+            l.append(drop_pwd(fields[0]))
+    return l
+
+def drop_pwd(s):
+    cwd = os.getcwd()
+    result = ""
+    if re.search(cwd, s):
+        result = re.sub(cwd+'/', '', s)
+    return result
+
 this_directory = path.abspath(path.dirname(__file__))
 with open(path.join(this_directory, 'README.md'), encoding='utf-8') as f:
     long_description = f.read()
 
-
 setup(name='damenltk',
-      version='0.0.11',
+      version='0.0.16',
       description='Learning about Natural Language Tool Kit (NLTK) from tests',
       long_description=long_description,
       long_description_content_type='text/markdown',
@@ -45,13 +72,17 @@ setup(name='damenltk',
         'Topic :: Text Processing :: Linguistic',
       ],
       keywords='nlp nltk',
-
       url='http://github.com/davidam/damenltk',
       author='David Arroyo Menéndez',
       author_email='davidam@gnu.org',
       license='GPLv3',
-      packages=['nltk', 'nltk.test', 'nltk.app'],
-      package_dir={'nltk': 'source', 'nltk.test': 'source/test', 'nltk.app': 'source/app'},
+      packages=['damenltk', 'damenltk.test', 'damenltk.app'],
+      package_dir={'damenltk': 'source', 'damenltk.test': 'source/test', 'damenltk.app': 'source/app'},
+      package_data={'damenltk': ['*'],
+                    'damenltk.app': ['*'],
+                    'damenltk.test': ['*'],
+                    'damenltk.root': ['*']},
+      data_files=[('damenltk', ['README.org', 'README.md'] + files_one_level_drop_pwd(cwd+"/source/app") + files_one_level_drop_pwd(cwd+"/source/test"))],
       install_requires=[
           'markdown',
           'nltk',
