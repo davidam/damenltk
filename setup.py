@@ -57,14 +57,13 @@ def drop_pwd(s):
     return result
 
 this_directory = path.abspath(path.dirname(__file__))
-with open(path.join(this_directory, 'README.md'), encoding='utf-8') as f:
+with open(path.join(this_directory, 'README.md')) as f:
     long_description = f.read()
 
 setup(name='damenltk',
-      version='0.0.16',
+      version='0.0.17',
       description='Learning about Natural Language Tool Kit (NLTK) from tests',
       long_description=long_description,
-      long_description_content_type='text/markdown',
       classifiers=[
         'Development Status :: 3 - Alpha',
         'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
