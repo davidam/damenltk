@@ -17,51 +17,33 @@
 # GNU General Public License for more details.
 
 # You should have received a copy of the GNU General Public License
-# along with GNU Emacs; see the file COPYING.  If not, write to
+# along with DameNLTK; see the file COPYING.  If not, write to
 # the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
 # Boston, MA 02110-1301 USA,
 
-from setuptools import setup
+#from setuptools import setup
 import os
+import codecs
+import os.path
 import re
+import sys
+import unittest
 from os import path
 
-# def readme():
-#     with open('README.org') as f:
-#         return f.read()
-
-cwd = os.getcwd()
-
-def files_one_level(directory):
-    f = os.popen('find '+ directory )
-    l = []
-    for line in f:
-        fields = line.strip().split()
-        l.append(fields[0])
-    return l
-
-def files_one_level_drop_pwd(directory):
-    f = os.popen('find '+ directory)
-    l = []
-    for line in f:
-        fields = line.strip().split()
-        if not(os.path.isdir(fields[0])) and ("__init__.py" not in fields[0]):
-            l.append(drop_pwd(fields[0]))
-    return l
-
-def drop_pwd(s):
-    cwd = os.getcwd()
-    result = ""
-    if re.search(cwd, s):
-        result = re.sub(cwd+'/', '', s)
-    return result
+from setuptools import setup
+from setuptools.command.test import test as TestClass
 
 this_directory = path.abspath(path.dirname(__file__))
 with open(path.join(this_directory, 'README.md')) as f:
     long_description = f.read()
 
+
 setup(name='damenltk',
-      version='0.0.17',
+      url='http://github.com/davidam/damenltk',
+      author='David Arroyo Menéndez',
+      author_email='davidam@gnu.org',
+      license='GPLv3',      
+      version='0.0.28',
       description='Learning about Natural Language Tool Kit (NLTK) from tests',
       long_description=long_description,
       classifiers=[
@@ -70,23 +52,28 @@ setup(name='damenltk',
         'Programming Language :: Python :: 3.6',
         'Topic :: Text Processing :: Linguistic',
       ],
-      keywords='nlp nltk',
-      url='http://github.com/davidam/damenltk',
-      author='David Arroyo Menéndez',
-      author_email='davidam@gnu.org',
-      license='GPLv3',
-      packages=['damenltk', 'damenltk.test', 'damenltk.app'],
-      package_dir={'damenltk': 'source', 'damenltk.test': 'source/test', 'damenltk.app': 'source/app'},
-      package_data={'damenltk': ['*'],
-                    'damenltk.app': ['*'],
-                    'damenltk.test': ['*'],
-                    'damenltk.root': ['*']},
-      data_files=[('damenltk', ['README.org', 'README.md'] + files_one_level_drop_pwd(cwd+"/source/app") + files_one_level_drop_pwd(cwd+"/source/test"))],
+      keywords="nlp nltk",
+      packages=[
+          'damenltk',
+          'damenltk.src',
+          'damenltk.test'
+      ],
+      namespace_packages=[
+          'damenltk',
+          'damenltk.src'
+      ],
+      setup_requires=[
+          'markdown'
+      ],
+      tests_require=[
+          'httpretty==0.8.6'
+      ],
       install_requires=[
           'markdown',
-          'nltk',
+          'nltk'
       ],
-      test_suite='nose.collector',
-      tests_require=['nose', 'nose-cover3'],
-      include_package_data=True,
+      scripts=[
+#          'bin/perceval'
+      ],
+#      cmdclass=cmdclass,
       zip_safe=False)
