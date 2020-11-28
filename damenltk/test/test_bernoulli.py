@@ -27,7 +27,7 @@ from sklearn.naive_bayes import BernoulliNB
 from sklearn.svm import SVC
 class TddInPythonExample(unittest.TestCase):
 
-    def test_bernollinb_returns_correct_result(self):
+    def test_bernoullinb_returns_correct_result(self):
         train_data = [({"a": 4, "b": 1, "c": 0}, "ham"),
                       ({"a": 5, "b": 2, "c": 1}, "ham"),
                       ({"a": 0, "b": 3, "c": 4}, "spam"),
