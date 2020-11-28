@@ -22,6 +22,7 @@
 # Boston, MA 02110-1301 USA,
 
 import sys
+import nltk
 from nltk import wordpunct_tokenize
 from nltk.corpus import brown, stopwords
 from nltk.cluster.util import cosine_distance
@@ -85,7 +86,15 @@ class DameNLTK(object):
 
         return wordsFiltered
 
-    
+    def remove_words_not_included_in_language(self, sent, language):
+        words = set(nltk.corpus.words.words(language))
+#        sent = "Io andiamo to the beach with my amico."
+        l = []
+        for w in nltk.wordpunct_tokenize(sent):
+            if w.lower() in words:
+                l.append(w)
+        return l
+        
     def calculate_languages_ratios(self, text):
         """
         Calculate probability of given text to be written in several languages and
@@ -119,7 +128,7 @@ class DameNLTK(object):
 
         return languages_ratios
 
-    def syllables_in_word(word):
+    def syllables_in_word(self, word):
         '''Attempts to count the number of syllables in the string argument 'word'.
 
         Limitation: word must be in the CMU dictionary (but that was a premise of the Exercise)
@@ -133,7 +142,7 @@ class DameNLTK(object):
         else:
             return 0
 
-    def syllables_in_text(text):
+    def syllables_in_text(self, text):
         '''Attempts to count the number of syllables in the string argument 'text'.
 
         Limitation: any "internal punctuation" must be part of the word. (it wouldn't get "this,and" correctly)
