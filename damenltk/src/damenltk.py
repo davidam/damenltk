@@ -71,12 +71,12 @@ class DameNLTK(object):
         """
         ratios = self.calculate_languages_ratios(text)
         most_rated_language = max(ratios, key=ratios.get)
-        return most_rated_language    
-    
-    def remove_stopwords(self, string):
+        return most_rated_language
+
+    def remove_stopwords_from_string(self, string):
         if not string:
             string = "All work and no play makes jack dull boy. All work and no play makes jack a dull boy."
-        stopWords = set(stopwords.words('english'))        
+        stopWords = set(stopwords.words('english'))
         words = word_tokenize(string)
         wordsFiltered = []
 
@@ -86,6 +86,19 @@ class DameNLTK(object):
 
         return wordsFiltered
 
+    def remove_stopwords_from_array(self, array):
+        if not array:
+            array = ["All", "work", "and", "no", "play", "makes", "jack", "dull", "boy.", "All", "work", "and", "no", "play", "makes", "jack", "a", "dull", "boy", "."]
+        stopWords = set(stopwords.words('english'))
+        wordsFiltered = []
+
+        for w in array:
+            if w not in stopWords:
+                wordsFiltered.append(w)
+
+        return wordsFiltered
+
+
     def remove_words_not_included_in_language(self, sent, language):
         words = set(nltk.corpus.words.words(language))
 #        sent = "Io andiamo to the beach with my amico."
@@ -94,7 +107,7 @@ class DameNLTK(object):
             if w.lower() in words:
                 l.append(w)
         return l
-        
+
     def calculate_languages_ratios(self, text):
         """
         Calculate probability of given text to be written in several languages and
