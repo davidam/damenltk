@@ -45,10 +45,17 @@ class TddInPythonExample(unittest.TestCase):
         self.assertEqual(['For', 'sequences', ',', '(', 'strings', ',', 'lists', ',', 'tuples', ')', ',', 'use', 'fact', 'empty', 'sequences', 'false', '.'], dn.remove_stopwords_from_string("For sequences, (strings, lists, tuples), use the fact that empty sequences are false."))
         self.assertEqual(['For', 'sequences', ',', '(', 'strings', ',', 'lists', ',', 'tuples', ')', ',', 'use', 'fact', 'empty', 'sequences', 'false', '.'], dn.remove_stopwords_from_array(["For", "sequences", ",", "(", "strings", ",", "lists", ",", "tuples", ")", ",", "use", "the", "fact", "that", "empty", "sequences", "are", "false", "."]))
 
-    def test_remove_words_not_included_in_language(self):
+    def test_remove_words_not_included_in_language_from_string(self):
         dn = DameNLTK()
         sent = "Io andiamo to the beach with my amico."
-        words = dn.remove_words_not_included_in_language(sent, "en")
+        words = dn.remove_words_not_included_in_language_from_string(sent, "en")
+#        print(words)
+        self.assertEqual(words, ["Io", "to", "the", "beach", "with", "my"])
+
+    def test_remove_words_not_included_in_language_from_array(self):
+        dn = DameNLTK()
+        sent = ["Io", "andiamo", "to", "the", "beach", "with", "my", "amico", "."]
+        words = dn.remove_words_not_included_in_language_from_array(sent, "en")
 #        print(words)
         self.assertEqual(words, ["Io", "to", "the", "beach", "with", "my"])
 
