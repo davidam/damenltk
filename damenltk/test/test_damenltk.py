@@ -36,10 +36,6 @@ class TddInPythonExample(unittest.TestCase):
         '''
         self.assertEqual(dn.detect_language(textes), "spanish")
 
-    def test_sentencesimilarity_method_returns_correct_result(self):
-        dn = DameNLTK()
-        self.assertTrue(dn.sentence_similarity("This is a good sentence".split(), "This is a bad sentence".split()) > 0.6)
-
     def test_stopwords_remove_method_returns_correct_result(self):
         dn = DameNLTK()
         self.assertEqual(['For', 'sequences', ',', '(', 'strings', ',', 'lists', ',', 'tuples', ')', ',', 'use', 'fact', 'empty', 'sequences', 'false', '.'], dn.remove_stopwords_from_string("For sequences, (strings, lists, tuples), use the fact that empty sequences are false."))
