@@ -26,7 +26,7 @@ from nltk.corpus import cmudict
 import string
 
 class Syllable(object):
-    def syllables_in_word(word):
+    def syllables_in_word(self, word):
         '''Attempts to count the number of syllables in the string argument 'word'.
 
         Limitation: word must be in the CMU dictionary (but that was a premise of the Exercise)
@@ -40,7 +40,7 @@ class Syllable(object):
         else:
             return 0
 
-    def syllables_in_text(text):
+    def syllables_in_text(self, text):
         '''Attempts to count the number of syllables in the string argument 'text'.
 
         Limitation: any "internal punctuation" must be part of the word. (it wouldn't get "this,and" correctly)
@@ -53,4 +53,4 @@ class Syllable(object):
             for word in text.split()])                              # - alternatives at http://stackoverflow.com/questions/265960/
 
 s = Syllable()
-print(s.syllables_in_word())
+print(s.syllables_in_word("hello"))
