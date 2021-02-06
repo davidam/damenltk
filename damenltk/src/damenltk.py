@@ -28,6 +28,7 @@ from nltk.corpus import brown, stopwords
 from nltk.cluster.util import cosine_distance
 from nltk.tokenize import sent_tokenize, word_tokenize
 from nltk.corpus import cmudict
+from nltk.corpus import names
 import string
 
 class DameNLTK(object):
@@ -172,3 +173,29 @@ class DameNLTK(object):
         # anything fancier, and you might want a regex (and its associated performance penalty)
         return sum([syllables_in_word(word.strip(string.punctuation))       # but str.strip(delims) will strip all leading and trailing chars in "delims"!
             for word in text.split()])                              # - alternatives at http://stackoverflow.com/questions/265960/
+
+
+    def gender_name(self, name):
+        gender = 'undefined'
+        if name in names.words('male.txt'):
+            gender = 'male'
+        if name in names.words('female.txt'):
+            if (gender == 'male'):
+                gender = 'both'
+            else:
+                gender = 'female'
+        return gender
+
+    def gender_features(self, word):
+        return {'last_letter': word[-1]}
+    
+    def gender_classifier(self):
+        labeled_names = ([(name, 'male') for name in names.words('male.txt')] +
+                         [(name, 'female') for name in names.words('female.txt')])
+
+        featuresets = [(self.gender_features(n), gender) for (n, gender) in labeled_names]
+        train_set, test_set = featuresets[500:], featuresets[:500]
+        classifier = nltk.NaiveBayesClassifier.train(train_set)
+        return classifier
+
+    
