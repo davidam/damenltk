@@ -24,6 +24,7 @@
 import unittest
 import nltk
 from nltk import CFG
+from nltk.book import bigrams
 
 class TddInPythonExample(unittest.TestCase):
 
@@ -41,4 +42,8 @@ class TddInPythonExample(unittest.TestCase):
         self.assertEqual(str(grammar.start()), 'S')
         self.assertEqual("[S -> NP VP, PP -> P NP, NP -> Det N, NP -> NP PP, VP -> V NP, VP -> VP PP, Det -> 'a', Det -> 'the', N -> 'dog', N -> 'cat', V -> 'chased', V -> 'sat', P -> 'on', P -> 'in']", str(grammar.productions()))
     
-    
+    def test_bigrams_returns_correct_result(self):    
+        b = list(bigrams(['more', 'is', 'said', 'than', 'done']))
+        self.assertEqual([('more', 'is'), ('is', 'said'), ('said', 'than'), ('than', 'done')], list(bigrams(['more', 'is', 'said', 'than', 'done'])))
+
+        
