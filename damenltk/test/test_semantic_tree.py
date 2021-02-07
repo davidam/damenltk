@@ -24,7 +24,10 @@
 import unittest
 import nltk
 from nltk import CFG
-from nltk.book import bigrams
+from nltk import bigrams, trigrams
+from nltk.corpus import reuters
+from collections import Counter, defaultdict
+
 
 class TddInPythonExample(unittest.TestCase):
 
@@ -45,5 +48,24 @@ class TddInPythonExample(unittest.TestCase):
     def test_bigrams_returns_correct_result(self):    
         b = list(bigrams(['more', 'is', 'said', 'than', 'done']))
         self.assertEqual([('more', 'is'), ('is', 'said'), ('said', 'than'), ('than', 'done')], list(bigrams(['more', 'is', 'said', 'than', 'done'])))
+
+    def test_first_sentence_method_returns_correct_result(self):
+        first_sentence = reuters.sents()[0]
+        self.assertEqual(first_sentence[0:3], [u'ASIAN', u'EXPORTERS', u'FEAR'])
+
+    def test_bigrams_method_returns_correct_result(self):
+        first_sentence = reuters.sents()[0]
+        b = list(bigrams(first_sentence))
+        self.assertEqual(b[0:3], [(u'ASIAN', u'EXPORTERS'), (u'EXPORTERS', u'FEAR'), (u'FEAR', u'DAMAGE')])
+
+    def test_trigrams_method_returns_correct_result(self):
+        first_sentence = reuters.sents()[0]
+        t = list(trigrams(first_sentence))
+        self.assertEqual(t[0:3], [(u'ASIAN', u'EXPORTERS', u'FEAR'), (u'EXPORTERS', u'FEAR', u'DAMAGE'), (u'FEAR', u'DAMAGE', u'FROM')])
+
+    def test_trigrams_pad_method_returns_correct_result(self):
+        first_sentence = reuters.sents()[0]
+        t = list(trigrams(first_sentence, pad_left=True, pad_right=True))
+        self.assertEqual(t[0:3], [(None, None, u'ASIAN'), (None, u'ASIAN', u'EXPORTERS'), (u'ASIAN', u'EXPORTERS', u'FEAR')])
 
         
