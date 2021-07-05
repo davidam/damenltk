@@ -25,6 +25,7 @@ import unittest
 import nltk
 from nltk.corpus import wordnet
 
+
 class TddInPythonExample(unittest.TestCase):
 
     def test_syn_returns_correct_result(self):
@@ -34,14 +35,20 @@ class TddInPythonExample(unittest.TestCase):
         # Just the word:
         self.assertEqual(syns[0].lemmas()[0].name(), "plan")
         # Definition of that first synset:
-        self.assertEqual(syns[0].definition(), "a series of steps to be carried out or goals to be accomplished")
+        str1 = "a series of steps to be carried out"
+        str1 = str1 + " or goals to be accomplished"
+        self.assertEqual(syns[0].definition(), str1)
         # Examples of the word in use in sentences:
-        self.assertEqual(syns[0].examples(), ['they drew up a six-step plan', 'they discussed plans for a new bond issue'])
+        self.assertEqual(syns[0].examples(),
+                         ['they drew up a six-step plan',
+                          'they discussed plans for a new bond issue'])
 
     def test_antonym_returns_correct_result(self):
         antonyms = []
         for syn in wordnet.synsets("good"):
-            for l in syn.lemmas():
-                if l.antonyms():
-                    antonyms.append(l.antonyms()[0].name())
-        self.assertEqual(['evil', 'evilness', 'bad', 'badness', 'bad', 'evil', 'ill'], antonyms)
+            for l1 in syn.lemmas():
+                if l1.antonyms():
+                    antonyms.append(l1.antonyms()[0].name())
+        self.assertEqual(['evil', 'evilness', 'bad',
+                          'badness', 'bad', 'evil', 'ill'],
+                         antonyms)
