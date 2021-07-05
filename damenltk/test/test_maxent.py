@@ -23,6 +23,8 @@
 
 import unittest
 from nltk.classify import maxent
+
+
 class TddInPythonExample(unittest.TestCase):
 
     def test_maxent_returns_correct_result(self):
@@ -38,8 +40,11 @@ class TddInPythonExample(unittest.TestCase):
             {'a': 1, 'b': 0.8, 'c': 1.2},
             {'a': 5.2, 'b': 5.1, 'c': 5}
         ]
-        encoding = maxent.TypedMaxentFeatureEncoding.train(train, count_cutoff=3, alwayson_features=True)
-        classifier = maxent.MaxentClassifier.train(train, bernoulli=False, encoding=encoding, trace=0)
+        enc = maxent.TypedMaxentFeatureEncoding.train(train,
+                                                      count_cutoff=3,
+                                                      alwayson_features=True)
+        classifier = maxent.MaxentClassifier.train(train,
+                                                   bernoulli=False,
+                                                   encoding=encoding,
+                                                   trace=0)
         self.assertEqual(classifier.classify_many(test), ['y', 'x'])
-
-#print(classifier.classify_many(test))
