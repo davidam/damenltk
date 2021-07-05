@@ -32,31 +32,65 @@ class TddInPythonExample(unittest.TestCase):
     def test_detectlanguage_spanish_method_returns_correct_result(self):
         dn = DameNLTK()
         textes = '''
-        En un lugar de la Mancha de cuyo nombre no quiero acordarme, vivía un ingenioso hidalgo
+        En un lugar de la Mancha de cuyo nombre no quiero
+        acordarme, vivía un ingenioso hidalgo
         '''
         self.assertEqual(dn.detect_language(textes), "spanish")
 
     def test_stopwords_remove_method_returns_correct_result(self):
         dn = DameNLTK()
-        self.assertEqual(['For', 'sequences', ',', '(', 'strings', ',', 'lists', ',', 'tuples', ')', ',', 'use', 'fact', 'empty', 'sequences', 'false', '.'], dn.remove_stopwords_from_string("For sequences, (strings, lists, tuples), use the fact that empty sequences are false."))
-        self.assertEqual(['For', 'sequences', ',', '(', 'strings', ',', 'lists', ',', 'tuples', ')', ',', 'use', 'fact', 'empty', 'sequences', 'false', '.'], dn.remove_stopwords_from_array(["For", "sequences", ",", "(", "strings", ",", "lists", ",", "tuples", ")", ",", "use", "the", "fact", "that", "empty", "sequences", "are", "false", "."]))
+        str1 = '''
+        For sequences, (strings, lists, tuples),
+        use the fact that empty sequences are false.
+        '''
+        self.assertEqual(['For', 'sequences', ',', '(', 'strings',
+                          ',', 'lists', ',', 'tuples', ')', ',', 'use',
+                          'fact', 'empty', 'sequences', 'false', '.'],
+                         dn.remove_stopwords_from_string(str1))
+        self.assertEqual(['For', 'sequences', ',', '(', 'strings', ',',
+                          'lists', ',', 'tuples', ')', ',', 'use', 'fact',
+                          'empty', 'sequences', 'false', '.'],
+                         dn.remove_stopwords_from_array(
+                             ["For", "sequences", ",", "(", "strings", ",",
+                              "lists", ",", "tuples", ")", ",", "use", "the",
+                              "fact", "that", "empty", "sequences", "are",
+                              "false", "."]))
 
-    def test_remove_words_not_included_in_language_from_string(self):
+    def test_remove_words_not_in_lang_from_string(self):
         dn = DameNLTK()
         sent = "Io andiamo to the beach with my amico."
-        words = dn.remove_words_not_included_in_language_from_string(sent, "en")
-#        print(words)
+        words = dn.remove_words_not_in_lang_from_string(sent, "en")
         self.assertEqual(words, ["Io", "to", "the", "beach", "with", "my"])
 
-    def test_remove_words_not_included_in_language_from_array(self):
+    def test_remove_words_not_in_lang_from_array(self):
         dn = DameNLTK()
-        sent = ["Io", "andiamo", "to", "the", "beach", "with", "my", "amico", "."]
-        words = dn.remove_words_not_included_in_language_from_array(sent, "en")
-#        print(words)
+        sent = ["Io", "andiamo", "to", "the",
+                "beach", "with", "my", "amico", "."]
+        words = dn.remove_words_not_in_lang_from_array(sent, "en")
         self.assertEqual(words, ["Io", "to", "the", "beach", "with", "my"])
 
     def test_stopwords_definition_method_returns_correct_result(self):
         st0 = stopwords.words('english')
-        st1 = ['i', 'me', 'my', 'myself', 'we', 'our', 'ours', 'ourselves', 'you', 'your', 'yours', 'yourself', 'yourselves', 'he', 'him', 'his', 'himself', 'she', 'her', 'hers', 'herself', 'it', 'its', 'itself', 'they', 'them', 'their', 'theirs', 'themselves', 'what', 'which', 'who', 'whom', 'this', 'that', 'these', 'those', 'am', 'is', 'are', 'was', 'were', 'be', 'been', 'being', 'have', 'has', 'had', 'having', 'do', 'does', 'did', 'doing', 'a', 'an', 'the', 'and', 'but', 'if', 'or', 'because', 'as', 'until', 'while', 'of', 'at', 'by', 'for', 'with', 'about', 'against', 'between', 'into', 'through', 'during', 'before', 'after', 'above', 'below', 'to', 'from', 'up', 'down', 'in', 'out', 'on', 'off', 'over', 'under', 'again', 'further', 'then', 'once', 'here', 'there', 'when', 'where', 'why', 'how', 'all', 'any', 'both', 'each', 'few', 'more', 'most', 'other', 'some', 'such', 'no', 'nor', 'not', 'only', 'own', 'same', 'so', 'than', 'too', 'very', 's', 't', 'can', 'will', 'just', 'don', 'should', 'now', 'd', 'll', 'm', 'o', 're', 've', 'y', 'ain', 'aren', 'couldn', 'didn', 'doesn', 'hadn', 'hasn', 'haven', 'isn', 'ma', 'mightn', 'mustn', 'needn', 'shan', 'shouldn', 'wasn', 'weren', 'won', 'wouldn']
+        st1 = ['i', 'me', 'my', 'myself', 'we', 'our', 'ours', 'ourselves',
+               'you', 'your', 'yours', 'yourself', 'yourselves', 'he', 'him',
+               'his', 'himself', 'she', 'her', 'hers', 'herself', 'it', 'its',
+               'itself', 'they', 'them', 'their', 'theirs', 'themselves',
+               'what', 'which', 'who', 'whom', 'this', 'that', 'these',
+               'those', 'am', 'is', 'are', 'was', 'were', 'be', 'been',
+               'being', 'have', 'has', 'had', 'having', 'do', 'does',
+               'did', 'doing', 'a', 'an', 'the', 'and', 'but', 'if',
+               'or', 'because', 'as', 'until', 'while', 'of', 'at',
+               'by', 'for', 'with', 'about', 'against', 'between', 'into',
+               'through', 'during', 'before', 'after', 'above', 'below',
+               'to', 'from', 'up', 'down', 'in', 'out', 'on', 'off', 'over',
+               'under', 'again', 'further', 'then', 'once', 'here', 'there',
+               'when', 'where', 'why', 'how', 'all', 'any', 'both', 'each',
+               'few', 'more', 'most', 'other', 'some', 'such', 'no', 'nor',
+               'not', 'only', 'own', 'same', 'so', 'than', 'too', 'very',
+               's', 't', 'can', 'will', 'just', 'don', 'should', 'now',
+               'd', 'll', 'm', 'o', 're', 've', 'y', 'ain', 'aren', 'couldn',
+               'didn', 'doesn', 'hadn', 'hasn', 'haven', 'isn', 'ma', 'mightn',
+               'mustn', 'needn', 'shan', 'shouldn', 'wasn', 'weren',
+               'won', 'wouldn']
         self.assertEqual(st0[0], st1[0])
         self.assertEqual(st0[4], st1[4])
