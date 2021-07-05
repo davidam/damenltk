@@ -25,6 +25,8 @@ import unittest
 from nltk.classify import SklearnClassifier
 from sklearn.naive_bayes import BernoulliNB
 from sklearn.svm import SVC
+
+
 class TddInPythonExample(unittest.TestCase):
 
     def test_svc_returns_correct_result(self):
@@ -33,10 +35,8 @@ class TddInPythonExample(unittest.TestCase):
                       ({"a": 0, "b": 3, "c": 4}, "spam"),
                       ({"a": 5, "b": 1, "c": 1}, "ham"),
                       ({"a": 1, "b": 4, "c": 3}, "spam")]
-        classif = SklearnClassifier(SVC(), sparse=False).train(train_data)
+        clf = SklearnClassifier(SVC(), sparse=False).train(train_data)
         test_data = [{"a": 3, "b": 2, "c": 1},
                      {"a": 0, "b": 3, "c": 7}]
-        ccm =  classif.classify_many(test_data)
+        ccm = clf.classify_many(test_data)
         self.assertEqual(ccm, ['ham', 'spam'])
-
-#print(classifier.classify_many(test))
