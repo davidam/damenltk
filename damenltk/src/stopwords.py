@@ -26,11 +26,13 @@ from nltk import wordpunct_tokenize
 from nltk.corpus import stopwords
 from nltk.tokenize import sent_tokenize, word_tokenize
 
+
 class StopWords(object):
     def remove(self, string):
         if not string:
-            string = "All work and no play makes jack dull boy. All work and no play makes jack a dull boy."
-        stopWords = set(stopwords.words('english'))        
+            str1 = "All work and no play makes jack dull boy."
+            str1 = str1 + "All work and no play makes jack a dull boy."
+        stopWords = set(stopwords.words('english'))
         words = word_tokenize(string)
         wordsFiltered = []
 
