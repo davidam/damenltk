@@ -26,6 +26,7 @@ import nltk
 from nltk.corpus import stopwords
 from src.damenltk import DameNLTK
 
+
 class TddInPythonExample(unittest.TestCase):
 
     def test_sentencesimilarity_method_returns_correct_result(self):
