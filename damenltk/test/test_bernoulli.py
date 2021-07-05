@@ -25,6 +25,8 @@ import unittest
 from nltk.classify import SklearnClassifier
 from sklearn.naive_bayes import BernoulliNB
 from sklearn.svm import SVC
+
+
 class TddInPythonExample(unittest.TestCase):
 
     def test_bernoullinb_returns_correct_result(self):
@@ -39,5 +41,3 @@ class TddInPythonExample(unittest.TestCase):
         ccm = classif.classify_many(test_data)
         ['ham', 'spam']
         self.assertEqual(ccm, ['ham', 'spam'])
-
-#print(classifier.classify_many(test))
