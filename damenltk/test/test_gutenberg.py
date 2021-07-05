@@ -24,6 +24,7 @@
 import unittest
 from nltk.book import *
 
+
 class TddInPythonExample(unittest.TestCase):
 
     def test_length_text3_returns_correct_result(self):
@@ -31,4 +32,4 @@ class TddInPythonExample(unittest.TestCase):
         self.assertTrue(length > 4000)
 
     def test_count_in_returns_correct_result(self):
-        self.assertTrue(text5.count("in")>0)
+        self.assertTrue(text5.count("in") > 0)
