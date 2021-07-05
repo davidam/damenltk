@@ -45,6 +45,6 @@ class TddInPythonExample(unittest.TestCase):
                                                       alwayson_features=True)
         classifier = maxent.MaxentClassifier.train(train,
                                                    bernoulli=False,
-                                                   encoding=encoding,
+                                                   encoding=enc,
                                                    trace=0)
         self.assertEqual(classifier.classify_many(test), ['y', 'x'])
