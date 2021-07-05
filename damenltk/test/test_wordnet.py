@@ -24,12 +24,15 @@
 import unittest
 from nltk.corpus import wordnet
 
+
 class TddInPythonExample(unittest.TestCase):
 
     def test_synonims_definition_method_returns_correct_result(self):
         syns = wordnet.synsets("program")
         s = syns[0].definition()
-        self.assertEqual("a series of steps to be carried out or goals to be accomplished", s)
+        str1 = "a series of steps to be carried out "
+        str1 = str1 + "or goals to be accomplished"
+        self.assertEqual(str1, s)
 
     def test_synonims_lemmas_method_returns_correct_result(self):
         syns = wordnet.synsets("program")
@@ -40,6 +43,7 @@ class TddInPythonExample(unittest.TestCase):
         w1 = wordnet.synset('ship.n.01')
         w2 = wordnet.synset('boat.n.01')
         self.assertTrue(w1.wup_similarity(w2) > 0.5)
+
 
 if __name__ == '__main__':
     unittest.main()
