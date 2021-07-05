@@ -31,6 +31,7 @@ from nltk.corpus import cmudict
 from nltk.corpus import names
 import string
 
+
 class DameNLTK(object):
     def sentence_similarity(self, sent1, sent2, stopwords=None):
         if stopwords is None:
@@ -60,10 +61,12 @@ class DameNLTK(object):
 
     def detect_language(self, text):
         """
-        Calculate probability of given text to be written in several languages and return the highest scored.
+        Calculate probability of given text to be
+        written in several languages and return the
+        highest scored.
 
-        It uses a stopwords based approach, counting how many unique stopwords
-        are seen in analyzed text.
+        It uses a stopwords based approach, counting
+        how many unique stopwords are seen in analyzed text.
 
         @param text: Text whose language want to be detected
         @type text: str
@@ -76,7 +79,9 @@ class DameNLTK(object):
 
     def remove_stopwords_from_string(self, string):
         if not string:
-            string = "All work and no play makes jack dull boy. All work and no play makes jack a dull boy."
+            string = "All work and no play makes jack dull"
+            string = string + " boy. All work and no play "
+            string = string + "makes jack a dull boy."
         stopWords = set(stopwords.words('english'))
         words = word_tokenize(string)
         wordsFiltered = []
@@ -89,7 +94,10 @@ class DameNLTK(object):
 
     def remove_stopwords_from_array(self, array):
         if not array:
-            array = ["All", "work", "and", "no", "play", "makes", "jack", "dull", "boy.", "All", "work", "and", "no", "play", "makes", "jack", "a", "dull", "boy", "."]
+            array = ["All", "work", "and", "no", "play",
+                     "makes", "jack", "dull", "boy.",
+                     "All", "work", "and", "no", "play",
+                     "makes", "jack", "a", "dull", "boy", "."]
         stopWords = set(stopwords.words('english'))
         wordsFiltered = []
         for w in array:
@@ -97,83 +105,89 @@ class DameNLTK(object):
                 wordsFiltered.append(w)
         return wordsFiltered
 
-    def remove_words_not_included_in_language_from_string(self, sent, language):
+    def remove_words_not_in_lang_from_string(self, sent, language):
         words = set(nltk.corpus.words.words(language))
-#        sent = "Io andiamo to the beach with my amico."
-        l = []
+        l1 = []
         for w in nltk.wordpunct_tokenize(sent):
             if w.lower() in words:
-                l.append(w)
-        return l
+                l1.append(w)
+        return l1
 
-    def remove_words_not_included_in_language_from_array(self, sent, language):
+    def remove_words_not_in_lang_from_array(self, sent, language):
         words = set(nltk.corpus.words.words(language))
-#        sent = "Io andiamo to the beach with my amico."
-        l = []
+        l1 = []
         for w in sent:
             if w.lower() in words:
-                l.append(w)
-        return l
-    
+                l1.append(w)
+        return l1
+
     def calculate_languages_ratios(self, text):
         """
-        Calculate probability of given text to be written in several languages and
-        return a dictionary that looks like {'french': 2, 'spanish': 4, 'english': 0}
+        Calculate probability of given text to be written
+        in several languages and return a dictionary
+        that looks like
+        {'french': 2, 'spanish': 4, 'english': 0}
 
         @param text: Text whose language want to be detected
         @type text: str
 
-        @return: Dictionary with languages and unique stopwords seen in analyzed text
+        @return: Dictionary with languages and unique
+        stopwords seen in analyzed text
         @rtype: dict
         """
-
         languages_ratios = {}
-
         '''
-        nltk.wordpunct_tokenize() splits all punctuations into separate tokens
-
-        >>> wordpunct_tokenize("That's thirty minutes away. I'll be there in ten.")
-        ['That', "'", 's', 'thirty', 'minutes', 'away', '.', 'I', "'", 'll', 'be', 'there', 'in', 'ten', '.']
+        nltk.wordpunct_tokenize() splits all punctuations
+        into separate tokens
         '''
-
         tokens = wordpunct_tokenize(text)
         words = [word.lower() for word in tokens]
 
-        # Compute per language included in nltk number of unique stopwords appearing in analyzed text
+        # Compute per language included in nltk number of
+        # unique stopwords appearing in analyzed text
         for language in stopwords.fileids():
             stopwords_set = set(stopwords.words(language))
             words_set = set(words)
             common_elements = words_set.intersection(stopwords_set)
-            languages_ratios[language] = len(common_elements) # language "score"
+            num = len(common_elements)  # language "score"
+            languages_ratios[language] = num
 
         return languages_ratios
 
     def syllables_in_word(self, word):
-        '''Attempts to count the number of syllables in the string argument 'word'.
-
-        Limitation: word must be in the CMU dictionary (but that was a premise of the Exercise)
-        "Algorithm": no. syllables == no. (0,1,2) digits in the dictionary entry, right??
-    '''
+        '''
+        Attempts to count the number of syllables in the
+        string argument 'word'
+        Limitation: word must be in the CMU dictionary
+        (but that was a premise of the Exercise)
+        "Algorithm": no. syllables == no. (0,1,2)
+        digits in the dictionary entry, right??
+        '''
         phoneme_dict = dict(cmudict.entries())
-        # although listcomps may be readable, you can't insert print statements to instrument them!!
         if word in phoneme_dict:
-        #return sum([ phoneme.count(str(num)) for phoneme in phoneme_dict[word] for num in range(3) ])
-            return len( [ph for ph in phoneme_dict[word] if ph.strip(string.letters)] )   # more destructive; less efficient? NO! see timeit results in my comments below
+            return len([ph for ph in phoneme_dict[word]
+                        if ph.strip(string.letters)])
         else:
             return 0
 
     def syllables_in_text(self, text):
-        '''Attempts to count the number of syllables in the string argument 'text'.
-
-        Limitation: any "internal punctuation" must be part of the word. (it wouldn't get "this,and" correctly)
+        '''
+        Attempts to count the number of syllables in
+        the string argument 'text'.
+        Limitation: any "internal punctuation" must be
+        part of the word. (it wouldn't get "this,and"
+        correctly)
         Lets syllables_in_word do the heavy lifting.
         '''
-
-        # ok, so apparently str.split(delim) only works for A SINGLE CHAR delim...
-        # anything fancier, and you might want a regex (and its associated performance penalty)
-        return sum([syllables_in_word(word.strip(string.punctuation))       # but str.strip(delims) will strip all leading and trailing chars in "delims"!
-            for word in text.split()])                              # - alternatives at http://stackoverflow.com/questions/265960/
-
+        # ok, so apparently str.split(delim) only
+        # works for A SINGLE CHAR delim...
+        # anything fancier, and you might want a regex
+        # (and its associated performance penalty)
+        # but str.strip(delims) will strip
+        # all leading and trailing chars in "delims"!
+        # - alternatives at http://stackoverflow.com/questions/265960/
+        return sum([syllables_in_word(word.strip(string.punctuation))
+                    for word in text.split()])
 
     def gender_name(self, name):
         gender = 'undefined'
@@ -188,14 +202,14 @@ class DameNLTK(object):
 
     def gender_features(self, word):
         return {'last_letter': word[-1]}
-    
-    def gender_classifier(self):
-        labeled_names = ([(name, 'male') for name in names.words('male.txt')] +
-                         [(name, 'female') for name in names.words('female.txt')])
 
-        featuresets = [(self.gender_features(n), gender) for (n, gender) in labeled_names]
+    def gender_classifier(self):
+        labeled_names = ([(name, 'male')
+                          for name in names.words('male.txt')] +
+                         [(name, 'female')
+                          for name in names.words('female.txt')])
+        featuresets = [(self.gender_features(n), gender)
+                       for (n, gender) in labeled_names]
         train_set, test_set = featuresets[500:], featuresets[:500]
         classifier = nltk.NaiveBayesClassifier.train(train_set)
         return classifier
-
-    
