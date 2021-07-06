@@ -26,6 +26,7 @@ import nltk
 from nltk.stem import *
 from nltk.stem.snowball import SnowballStemmer
 
+
 class TddInPythonExample(unittest.TestCase):
 
     def test_stem_returns_correct_result(self):
