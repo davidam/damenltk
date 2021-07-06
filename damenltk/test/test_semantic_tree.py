@@ -43,29 +43,53 @@ class TddInPythonExample(unittest.TestCase):
         P -> 'on' | 'in'
         """)
         self.assertEqual(str(grammar.start()), 'S')
-        self.assertEqual("[S -> NP VP, PP -> P NP, NP -> Det N, NP -> NP PP, VP -> V NP, VP -> VP PP, Det -> 'a', Det -> 'the', N -> 'dog', N -> 'cat', V -> 'chased', V -> 'sat', P -> 'on', P -> 'in']", str(grammar.productions()))
-    
-    def test_bigrams_returns_correct_result(self):    
+        grammar_str = "[S -> NP VP, "
+        grammar_str = grammar_str + "PP -> P NP, "
+        grammar_str = grammar_str + "NP -> Det N, "
+        grammar_str = grammar_str + "NP -> NP PP, "
+        grammar_str = grammar_str + "VP -> V NP, "
+        grammar_str = grammar_str + "VP -> VP PP, "
+        grammar_str = grammar_str + "Det -> 'a', "
+        grammar_str = grammar_str + "Det -> 'the', "
+        grammar_str = grammar_str + "N -> 'dog', "
+        grammar_str = grammar_str + "N -> 'cat', "
+        grammar_str = grammar_str + "V -> 'chased', "
+        grammar_str = grammar_str + "V -> 'sat', "
+        grammar_str = grammar_str + "P -> 'on', "
+        grammar_str = grammar_str + "P -> 'in']"
+        self.assertEqual(grammar_str, str(grammar.productions()))
+
+    def test_bigrams_returns_correct_result(self):
         b = list(bigrams(['more', 'is', 'said', 'than', 'done']))
-        self.assertEqual([('more', 'is'), ('is', 'said'), ('said', 'than'), ('than', 'done')], list(bigrams(['more', 'is', 'said', 'than', 'done'])))
+        self.assertEqual([('more', 'is'),
+                          ('is', 'said'),
+                          ('said', 'than'),
+                          ('than', 'done')],
+                         list(bigrams(['more', 'is', 'said', 'than', 'done'])))
 
     def test_first_sentence_method_returns_correct_result(self):
         first_sentence = reuters.sents()[0]
-        self.assertEqual(first_sentence[0:3], [u'ASIAN', u'EXPORTERS', u'FEAR'])
+        self.assertEqual(first_sentence[0:3],
+                         [u'ASIAN', u'EXPORTERS', u'FEAR'])
 
     def test_bigrams_method_returns_correct_result(self):
         first_sentence = reuters.sents()[0]
         b = list(bigrams(first_sentence))
-        self.assertEqual(b[0:3], [(u'ASIAN', u'EXPORTERS'), (u'EXPORTERS', u'FEAR'), (u'FEAR', u'DAMAGE')])
+        self.assertEqual(b[0:3], [(u'ASIAN', u'EXPORTERS'),
+                                  (u'EXPORTERS', u'FEAR'),
+                                  (u'FEAR', u'DAMAGE')])
 
     def test_trigrams_method_returns_correct_result(self):
         first_sentence = reuters.sents()[0]
         t = list(trigrams(first_sentence))
-        self.assertEqual(t[0:3], [(u'ASIAN', u'EXPORTERS', u'FEAR'), (u'EXPORTERS', u'FEAR', u'DAMAGE'), (u'FEAR', u'DAMAGE', u'FROM')])
+        self.assertEqual(t[0:3],
+                         [(u'ASIAN', u'EXPORTERS', u'FEAR'),
+                          (u'EXPORTERS', u'FEAR', u'DAMAGE'),
+                          (u'FEAR', u'DAMAGE', u'FROM')])
 
     def test_trigrams_pad_method_returns_correct_result(self):
         first_sentence = reuters.sents()[0]
         t = list(trigrams(first_sentence, pad_left=True, pad_right=True))
-        self.assertEqual(t[0:3], [(None, None, u'ASIAN'), (None, u'ASIAN', u'EXPORTERS'), (u'ASIAN', u'EXPORTERS', u'FEAR')])
-
-        
+        self.assertEqual(t[0:3], [(None, None, u'ASIAN'),
+                                  (None, u'ASIAN', u'EXPORTERS'),
+                                  (u'ASIAN', u'EXPORTERS', u'FEAR')])
