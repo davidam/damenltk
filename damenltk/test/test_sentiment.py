@@ -23,6 +23,8 @@
 
 import unittest
 from nltk.classify import SklearnClassifier
+
+
 class TddInPythonExample(unittest.TestCase):
 
     def test_sentiment_variable_create_returns_correct_result(self):
@@ -43,7 +45,35 @@ class TddInPythonExample(unittest.TestCase):
 
         tweets_with_sentiment = []
         for (tweet, sentiment) in pos_tweets + neg_tweets:
-            filtered_tweet_words = [word.lower() for word in tweet.split() if len(word) >= 3]
+            filtered_tweet_words = [word.lower()
+                                    for word in tweet.split()
+                                    if len(word) >= 3]
             tweets_with_sentiment.append((filtered_tweet_words, sentiment))
 
-        self.assertEqual([(['love', 'this', 'car'], 'positive'), (['this', 'view', 'amazing'], 'positive'), (['feel', 'great', 'this', 'morning'], 'positive'), (['excited', 'about', 'the', 'concert'], 'positive'), (['best', 'friend'], 'positive'), (['this', 'movie', 'was', 'great'], 'positive'), (['this', 'movie', 'was', 'not', 'pathetic'], 'positive'), (['not', 'like', 'this', 'car'], 'negative'), (['this', 'view', 'horrible'], 'negative'), (['feel', 'tired', 'this', 'morning'], 'negative'), (['not', 'looking', 'forward', 'the', 'concert'], 'negative'), (['enemy'], 'negative'), (['this', 'pathetic', 'movie'], 'negative')], tweets_with_sentiment)
+        self.assertEqual([(['love', 'this', 'car'],
+                           'positive'),
+                          (['this', 'view', 'amazing'],
+                           'positive'),
+                          (['feel', 'great', 'this', 'morning'],
+                           'positive'),
+                          (['excited', 'about', 'the', 'concert'],
+                           'positive'),
+                          (['best', 'friend'],
+                           'positive'),
+                          (['this', 'movie', 'was', 'great'],
+                           'positive'),
+                          (['this', 'movie', 'was', 'not', 'pathetic'],
+                           'positive'),
+                          (['not', 'like', 'this', 'car'],
+                           'negative'),
+                          (['this', 'view', 'horrible'],
+                           'negative'),
+                          (['feel', 'tired', 'this', 'morning'],
+                           'negative'),
+                          (['not', 'looking', 'forward', 'the', 'concert'],
+                           'negative'),
+                          (['enemy'],
+                           'negative'),
+                          (['this', 'pathetic', 'movie'],
+                           'negative')],
+                         tweets_with_sentiment)
