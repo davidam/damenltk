@@ -31,4 +31,7 @@ class TddInPythonExample(unittest.TestCase):
 
     def test_sentencesimilarity_method_returns_correct_result(self):
         dn = DameNLTK()
-        self.assertTrue(dn.sentence_similarity("This is a good sentence".split(), "This is a bad sentence".split()) > 0.6)
+        self.assertTrue(
+            dn.sentence_similarity("This is a good sentence".split(),
+                                   "This is a bad sentence".split())
+            > 0.6)
