@@ -21,7 +21,6 @@
 # the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
 # Boston, MA 02110-1301 USA,
 
-#from setuptools import setup
 import os
 import codecs
 import os.path
@@ -42,8 +41,8 @@ setup(name='damenltk',
       url='http://github.com/davidam/damenltk',
       author='David Arroyo Menéndez',
       author_email='davidam@gnu.org',
-      license='GPLv3',      
-      version='0.1.1',
+      license='GPLv3',
+      version='0.1.5',
       description='Learning about Natural Language Tool Kit (NLTK) from tests',
       long_description=long_description,
       classifiers=[
@@ -72,8 +71,4 @@ setup(name='damenltk',
           'markdown',
           'nltk'
       ],
-      scripts=[
-#          'bin/perceval'
-      ],
-#      cmdclass=cmdclass,
       zip_safe=False)
