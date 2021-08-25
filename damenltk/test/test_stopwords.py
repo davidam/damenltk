@@ -63,3 +63,10 @@ class TddInPythonExample(unittest.TestCase):
                'won', 'wouldn']
         self.assertEqual(st0[0], st1[0])
         self.assertEqual(st0[4], st1[4])
+
+    def test_stopwords_spanish_method_returns_correct_result(self):
+        st0 = stopwords.words('spanish')
+        self.assertEqual(st0[0], "de")
+        self.assertEqual(st0[-1], "tened")
+
+        
