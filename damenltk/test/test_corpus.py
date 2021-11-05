@@ -31,7 +31,7 @@ from nltk.corpus import cmudict
 from nltk.corpus import twitter_samples
 from nltk.corpus import verbnet
 from nltk.corpus import wordnet
-
+from collections import Counter
 
 class TddInPythonExample(unittest.TestCase):
 
@@ -40,6 +40,12 @@ class TddInPythonExample(unittest.TestCase):
         self.assertEqual(['1789-Washington.txt',
                           '1793-Washington.txt',
                           '1797-Adams.txt'], fileids[0:3])
+
+    def test_corpus_bag_of_words_returns_correct_result(self):
+        counts = Counter(reuters.words())
+        self.assertEqual([('.', 94687), (',', 72360), ('the', 58251),
+                          ('of', 35979), ('to', 34035)],
+                         counts.most_common(n=5))
 
     def test_corpus_sents_method_returns_correct_result(self):
         sents1 = [['[', 'Sense', 'and', 'Sensibility',
