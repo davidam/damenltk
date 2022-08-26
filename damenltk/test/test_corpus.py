@@ -32,6 +32,9 @@ from nltk.corpus import twitter_samples
 from nltk.corpus import verbnet
 from nltk.corpus import wordnet
 from collections import Counter
+# fix for MacOS using nose
+import collections
+collections.Callable = collections.abc.Callable
 
 class TddInPythonExample(unittest.TestCase):
 

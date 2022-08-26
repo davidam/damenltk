@@ -27,6 +27,9 @@ import random
 from nltk.corpus import stopwords
 from nltk.corpus import names
 from src.damenltk import DameNLTK
+# fix for MacOS using nose
+import collections
+collections.Callable = collections.abc.Callable
 
 
 class TddInPythonExample(unittest.TestCase):
