@@ -40,9 +40,9 @@ with open(path.join(this_directory, 'README.md')) as f:
 setup(name='damenltk',
       url='http://github.com/davidam/damenltk',
       author='David Arroyo Menéndez',
-      author_email='davidam@gnu.org',
+      author_email='davidam@gmail.com',
       license='GPLv3',
-      version='0.1.6.post2',
+      version='0.1.6.post5',
       description='Learning about Natural Language Tool Kit (NLTK) from tests',
       long_description=long_description,
       classifiers=[
@@ -72,4 +72,5 @@ setup(name='damenltk',
           'markdown',
           'nltk'
       ],
+      include_package_data=True,
       zip_safe=False)
