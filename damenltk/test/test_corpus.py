@@ -36,6 +36,7 @@ from collections import Counter
 import collections
 collections.Callable = collections.abc.Callable
 
+
 class TddInPythonExample(unittest.TestCase):
 
     def test_corpus_fileids_method_returns_correct_result(self):
