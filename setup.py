@@ -42,7 +42,7 @@ setup(name='damenltk',
       author='David Arroyo Menéndez',
       author_email='davidam@gnu.org',
       license='GPLv3',
-      version='0.1.5',
+      version='0.1.6.post2',
       description='Learning about Natural Language Tool Kit (NLTK) from tests',
       long_description=long_description,
       classifiers=[
@@ -57,6 +57,7 @@ setup(name='damenltk',
           'damenltk.src',
           'damenltk.test'
       ],
+      data_files=[('damenltk', ['damenltk/runtests.sh'])],
       namespace_packages=[
           'damenltk',
           'damenltk.src'
