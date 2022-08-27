@@ -68,5 +68,3 @@ class TddInPythonExample(unittest.TestCase):
         st0 = stopwords.words('spanish')
         self.assertEqual(st0[0], "de")
         self.assertEqual(st0[-1], "tened")
-
-        
