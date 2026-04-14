@@ -1,12 +1,9 @@
-<div id="table-of-contents">
-<h2>Table of Contents</h2>
-<div id="text-table-of-contents">
-<ul>
-<li><a href="#sec-1">1. Check Test</a></li>
-<li><a href="#sec-2">2. Pypi</a></li>
-</ul>
-</div>
-</div>
+
+# Table of Contents
+
+1.  [Installing](#org400d147)
+2.  [Check Test](#org4e85ed4)
+3.  [Pypi](#org2fc3008)
 
 Learning about Natural Language Tool Kit (NLTK) from tests
 
@@ -16,7 +13,18 @@ Thanks to GAPLEN by the shared time.
 
 Learning NLTK from Tests by David Arroyo Menéndez
 
-# Check Test<a id="sec-1" name="sec-1"></a>
+
+<a id="org400d147"></a>
+
+# Installing
+
+    $ pip3 intall damenltk
+    $ python3 damenltk/installing-nltk-modules.py
+
+
+<a id="org4e85ed4"></a>
+
+# Check Test
 
 -   Execute all tests:
 
@@ -30,7 +38,10 @@ Learning NLTK from Tests by David Arroyo Menéndez
 
     nosetests3 test/test_syn.py:TddInPythonExample.test_syn_returns_correct_result
 
-# Pypi<a id="sec-2" name="sec-2"></a>
+
+<a id="org2fc3008"></a>
+
+# Pypi
 
 -   To install from local:
 
@@ -38,7 +49,7 @@ $ pip install -e .
 
 -   To install create tar.gz in dist directory:
 
-$ python3 setup.py register sdist
+$ python3 -m build
 
 -   To upload to pypi:
 
@@ -50,3 +61,4 @@ $ python3 -m venv /tmp/dn
 $ cd /tmp/dn
 $ source bin/activate
 $ pip3 install damenltk
+
