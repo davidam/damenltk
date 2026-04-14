@@ -9,39 +9,41 @@ Learning NLTK from Tests by David Arroyo Menéndez
 
 * Installing
 #+BEGIN_SRC
-$ pip3 intall damenltk
+$ pip3 install damenltk
 $ python3 damenltk/installing-nltk-modules.py
 #+END_SRC
 
 * Check Test
 + Execute all tests:
 #+BEGIN_SRC
-$ nosetests3 tests
+$ ./runtests.sh
 #+END_SRC
 
 + Execute one file:
 #+BEGIN_SRC
-$ nosetests3 tests/test_basics.py
-#+END_SRC
-
-+ Execute one test:
-#+BEGIN_SRC
-nosetests3 test/test_syn.py:TddInPythonExample.test_syn_returns_correct_result
+$ pytest test/test_bernoulli.py 
 #+END_SRC
 
 * Pypi
 + To install from local: 
+#+BEGIN_SRC bash
 $ pip install -e .
+#+END_SRC
 
 + To install create tar.gz in dist directory: 
+#+BEGIN_SRC bash
 $ python3 -m build
+#+END_SRC
 
 + To upload to pypi: 
+#+BEGIN_SRC bash
 $ twine upload dist/damenltk-0.1.tar.gz
+#+END_SRC
 
 + You can install from Internet in a python virtual environment to check: 
+#+BEGIN_SRC bash
 $ python3 -m venv /tmp/dn
 $ cd /tmp/dn
 $ source bin/activate
 $ pip3 install damenltk
-
+#+END_SRC
