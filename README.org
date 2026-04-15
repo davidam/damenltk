@@ -1,4 +1,4 @@
-
+ç
 Learning about Natural Language Tool Kit (NLTK) from tests
 
 A first version can be found in: https://github.com/Lingwars/GAPLEN
@@ -7,9 +7,11 @@ Thanks to GAPLEN by the shared time.
 
 Learning NLTK from Tests by David Arroyo Menéndez
 
-* Installing
+* Installing from git
 #+BEGIN_SRC
-$ pip3 install damenltk
+$ git clone https://github.com/davidam/damenltk
+$ pip3 install nltk scikit-learn
+$ cd damenltk
 $ python3 damenltk/installing-nltk-modules.py
 #+END_SRC
 
@@ -25,25 +27,23 @@ $ pytest test/test_bernoulli.py
 #+END_SRC
 
 * Pypi
-+ To install from local: 
-#+BEGIN_SRC bash
-$ pip install -e .
-#+END_SRC
-
-+ To install create tar.gz in dist directory: 
-#+BEGIN_SRC bash
-$ python3 -m build
-#+END_SRC
-
-+ To upload to pypi: 
-#+BEGIN_SRC bash
-$ twine upload dist/damenltk-0.1.tar.gz
-#+END_SRC
-
 + You can install from Internet in a python virtual environment to check: 
-#+BEGIN_SRC bash
+#+BEGIN_SRC 
 $ python3 -m venv /tmp/dn
 $ cd /tmp/dn
 $ source bin/activate
 $ pip3 install damenltk
+$ cd /tmp/dn/lib/python3.14/site-packages/damenltk
+$ pytest test/test_bernoulli.py 
 #+END_SRC
+
++ To create new tar.gz in dist directory: 
+#+BEGIN_SRC 
+$ python3 -m build
+#+END_SRC
+
++ To upload to pypi: 
+#+BEGIN_SRC 
+$ twine upload dist/damenltk-0.1.tar.gz
+#+END_SRC
+

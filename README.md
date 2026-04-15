@@ -1,9 +1,9 @@
 
 # Table of Contents
 
-1.  [Installing](#orgd697461)
-2.  [Check Test](#orgdfa0beb)
-3.  [Pypi](#org43a0292)
+1.  [Installing from git](#orgae0aae0)
+2.  [Check Test](#orgdb5c7ae)
+3.  [Pypi](#orgf7a89f3)
 
 Learning about Natural Language Tool Kit (NLTK) from tests
 
@@ -14,15 +14,17 @@ Thanks to GAPLEN by the shared time.
 Learning NLTK from Tests by David Arroyo Menéndez
 
 
-<a id="orgd697461"></a>
+<a id="orgae0aae0"></a>
 
-# Installing
+# Installing from git
 
-    $ pip3 install damenltk
+    $ git clone https://github.com/davidam/damenltk
+    $ pip3 install nltk scikit-learn
+    $ cd damenltk
     $ python3 damenltk/installing-nltk-modules.py
 
 
-<a id="orgdfa0beb"></a>
+<a id="orgdb5c7ae"></a>
 
 # Check Test
 
@@ -35,21 +37,9 @@ Learning NLTK from Tests by David Arroyo Menéndez
     $ pytest test/test_bernoulli.py 
 
 
-<a id="org43a0292"></a>
+<a id="orgf7a89f3"></a>
 
 # Pypi
-
--   To install from local:
-
-    $ pip install -e .
-
--   To install create tar.gz in dist directory:
-
-    $ python3 -m build
-
--   To upload to pypi:
-
-    $ twine upload dist/damenltk-0.1.tar.gz
 
 -   You can install from Internet in a python virtual environment to check:
 
@@ -57,4 +47,14 @@ Learning NLTK from Tests by David Arroyo Menéndez
     $ cd /tmp/dn
     $ source bin/activate
     $ pip3 install damenltk
+    $ cd /tmp/dn/lib/python3.14/site-packages/damenltk
+    $ pytest test/test_bernoulli.py 
+
+-   To create new tar.gz in dist directory:
+
+    $ python3 -m build
+
+-   To upload to pypi:
+
+    $ twine upload dist/damenltk-0.1.tar.gz
 
