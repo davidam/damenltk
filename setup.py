@@ -42,7 +42,7 @@ setup(name='damenltk',
       author='David Arroyo Menéndez',
       author_email='davidam@gmail.com',
       license='GPLv3',
-      version='0.1.6.post5',
+      version='0.1.12',
       description='Learning about Natural Language Tool Kit (NLTK) from tests',
       long_description=long_description,
       classifiers=[
@@ -52,15 +52,24 @@ setup(name='damenltk',
         'Topic :: Text Processing :: Linguistic',
       ],
       keywords="nlp nltk",
-      packages=[
-          'damenltk',
-          'damenltk.src',
-          'damenltk.test'
-      ],
-      data_files=[('damenltk', ['damenltk/runtests.sh'])],
+      packages=['damenltk', 'damenltk.src', 'damenltk.test'],
+      package_dir={'damenltk': 'damenltk', 'damenltk.src': 'damenltk/src', 'damenltk.test': 'damenltk/test'},
+      package_data={'damenltk': ['*'],
+                    'damenltk.src': ['*'],
+                    'damenltk.test': ['*']},      
+      # data_files=[('damenltk', ['damenltk/runtests.sh',
+      #                           'damenltk/installing-nltk-modules.py',
+      #                           'damenltk/src/damenltk.py',
+      #                           'damenltk/src/stopwords.py',
+      #                           'damenltk/src/syllable.py',
+      #                           'damenltk/test/test_corpus.py',
+      #                           'damenltk/test/test_stem.py',                                
+      #                           'damenltk/test/test_tokenize.py',
+      #                           'damenltk/test/test_semantic_tree.py'])], 
       namespace_packages=[
           'damenltk',
-          'damenltk.src'
+          'damenltk.src',
+          'damenltk.test'         
       ],
       setup_requires=[
           'markdown'
@@ -70,6 +79,7 @@ setup(name='damenltk',
       ],
       install_requires=[
           'markdown',
+          'scikit-learn',          
           'nltk'
       ],
       include_package_data=True,
