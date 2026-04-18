@@ -21,29 +21,29 @@
 # # the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
 # # Boston, MA 02110-1301 USA,
 
-# import unittest
-# import nltk
-# import random
-# from nltk.corpus import stopwords
-# from nltk.corpus import names
-# from src.damenltk import DameNLTK
-# # fix for MacOS using nose
-# import collections
-# collections.Callable = collections.abc.Callable
+import unittest
+import nltk
+import random
+from nltk.corpus import stopwords
+from nltk.corpus import names
+from src.damenltk import DameNLTK
+# fix for MacOS using nose
+import collections
+collections.Callable = collections.abc.Callable
 
 
-# class TddInPythonExample(unittest.TestCase):
+class TddInPythonExample(unittest.TestCase):
 
-#     def test_gender_name_method_returns_correct_result(self):
-#         dn = DameNLTK()
-#         self.assertTrue(dn.gender_name("Neo"), "male")
-#         self.assertTrue(dn.gender_name("Trinity"), "female")
-#         self.assertTrue(dn.gender_name("Andrea"), "both")
+    def test_gender_name_method_returns_correct_result(self):
+        dn = DameNLTK()
+        self.assertTrue(dn.gender_name("Neo"), "male")
+        self.assertTrue(dn.gender_name("Trinity"), "female")
+        self.assertTrue(dn.gender_name("Andrea"), "both")
 
-#     def test_gender_classifier_method_returns_correct_result(self):
-#         dn = DameNLTK()
-#         classifier = dn.gender_classifier()
-#         neo = dn.gender_features("Neo")
-#         self.assertTrue(classifier.classify(neo), "male")
-#         trinity = dn.gender_features("Trinity")
-#         self.assertTrue(classifier.classify(trinity), "female")
+    def test_gender_classifier_method_returns_correct_result(self):
+        dn = DameNLTK()
+        classifier = dn.gender_classifier()
+        neo = dn.gender_features("Neo")
+        self.assertTrue(classifier.classify(neo), "male")
+        trinity = dn.gender_features("Trinity")
+        self.assertTrue(classifier.classify(trinity), "female")
