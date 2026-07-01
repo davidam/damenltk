@@ -23,6 +23,7 @@
 
 import unittest
 from nltk.corpus import wordnet
+from nltk.stem import WordNetLemmatizer
 
 
 class TddInPythonExample(unittest.TestCase):
@@ -43,6 +44,15 @@ class TddInPythonExample(unittest.TestCase):
         w1 = wordnet.synset('ship.n.01')
         w2 = wordnet.synset('boat.n.01')
         self.assertTrue(w1.wup_similarity(w2) > 0.5)
+
+    def test_lemmatizer(self):
+        lemmatizer = WordNetLemmatizer()
+        self.assertEqual(lemmatizer.lemmatize("cats"), "cat")
+        self.assertEqual(lemmatizer.lemmatize("women"), "woman")
+        self.assertEqual(lemmatizer.lemmatize("geese"), "goose")
+        self.assertEqual(lemmatizer.lemmatize("pythons"), "python")
+        self.assertEqual(lemmatizer.lemmatize("children"), "child")
+        self.assertEqual(lemmatizer.lemmatize("better", pos="a"), "good")        
 
 
 if __name__ == '__main__':
