@@ -26,38 +26,23 @@ import string
 
 
 class Syllable(object):
-    def syllables_in_word(self, word):
-        '''Attempts to count the number of syllables in
-        the string argument 'word'.
-        Limitation: word must be in the CMU dictionary
-        (but that was a premise of the Exercise)
-        "Algorithm": no. syllables == no. (0,1,2)
-        digits in the dictionary entry, right??
-        '''
-        phoneme_dict = dict(cmudict.entries())
-        # although listcomps may be readable,
-        # you can't insert print statements to instrument them!!
-        if word in phoneme_dict:
-            # more destructive; less efficient?
-            # NO! see timeit results in my comments below
-            return len([ph for ph in phoneme_dict[word]
-                        if ph.strip(string.letters)])
-        else:
-            return 0
+    
+    def count_syllables(self, word):
+        vowels = "aeiouy"
+        numVowels = 0
+        lastWasVowel = False
+        for wc in word:
+            foundVowel = False
+            for v in vowels:
+                if v == wc:
+                    if not lastWasVowel: numVowels+=1 #don't count diphthongs
+                    foundVowel = lastWasVowel = True
+                if not foundVowel: #If full cycle and no vowel found, set lastWasVowel to false
+                    lastWasVowel = False
+        if len(word) > 2 and word[-2:] == "es": #Remove es - it's "usually" silent (?)
+            numVowels-=1
+        elif len(word) > 1 and word[-1:] == "e": #remove silent e
+            numVowels-=1
+        return numVowels
 
-    def syllables_in_text(self, text):
-        '''Attempts to count the number of syllables
-        in the string argument 'text'.
-        Limitation: any "internal punctuation" must be part of the word.
-        (it wouldn't get "this,and" correctly)
-        Lets syllables_in_word do the heavy lifting.
-        '''
-        # ok, so apparently str.split(delim)
-        # only works for A SINGLE CHAR delim...
-        # anything fancier, and you might want a regex
-        # (and its associated performance penalty)
-        # but str.strip(delims) will strip all leading
-        # and trailing chars in "delims"!
-        # - alternatives at http://stackoverflow.com/questions/265960/
-        return sum([syllables_in_word(word.strip(string.punctuation))
-                    for word in text.split()])
+    
